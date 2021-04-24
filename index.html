@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <style>
+        .header{
+            margin: 15px;
+        }
+        .test{
+            margin-top: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            position: relative;
+        }
+        .one{
+            border: black 2px solid;
+            height: 300px;
+            width: 10%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            text-align: center;
+        }
+        .img{
+            height: 100px;
+            width: 100px;
+            border: black 2px solid;
+        }
+        .two{
+            height: 400px;
+            width: 30%;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .two img{
+            border: black 2px solid;
+            height: 400px;
+            width: 100%;
+            object-fit:contain;
+            cursor: zoom-in;
+        }
+        .three{
+            z-index: 1;
+            border: solid black 2px;
+            height: 500px;
+            width: 35%;
+            background-repeat: no-repeat;
+            visibility: hidden;
+        }
+    </style>
+
+<script>
+    var pic = "./assets/1.jpeg";
+    function changeimg(event){
+        pic = event.srcElement.currentSrc.replace('http://127.0.0.1:5500','')
+        document.getElementById("main").src = pic;
+    }
+
+     function zoomIn(event) {
+         console.log("hii");
+         var main = document.getElementById("main")
+        var pre = document.getElementById("zoom");
+        pre.style.backgroundImage = `url(${pic})`;
+        pre.style.visibility = "visible";
+        var posX = event.offsetX;
+        var posY = event.offsetY;
+        pre.style.backgroundPosition=(-posX*1.5)+"px "+(+posY*0.1)+"px";
+
+
+
+    }
+
+    function zoomOut() {
+      var pre = document.getElementById("zoom");
+      pre.style.visibility = "hidden";
+    }
+
+</script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Flipcart</a>
+          </div>
+        </div>
+    </nav>
+    <div class="header">
+        <h3>ADDIDAS <small>Best footware ever</small></h3>
+    </div>
+   <hr />
+    <div class="test">
+        <div class="one">
+            <img class="img" onmousemove="changeimg(event)"  src="./assets/1.jpeg">
+            <img class="img" onmousemove="changeimg(event)"  src="./assets/2.jpeg">
+            <img class="img" onmousemove="changeimg(event)"  src="./assets/1.jpeg">
+            <img class="img" onmousemove="changeimg(event)"  src="./assets/2.jpeg">
+            
+        </div>
+        <div class="two" >
+            <img id="main" onmousemove="zoomIn(event)" onmouseout="zoomOut()" src="./assets/1.jpeg"/>
+            <h3>Preview</h3>
+        </div>
+        <div class="three" id="zoom">
+
+        </div>
+    </div>
+</body>
+</html>
+
